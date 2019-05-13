@@ -153,6 +153,33 @@ Let's consider $u = \ddot{l}(t)$ as control input for the next sections. Since
 there is no control input controlling directly $\theta(t)$, the system is
 underactuated.
 
+Let's assume $m=1$. Let the total mechanical energy of the system $E_T$ be:
+\begin{equation}
+  E_T = T + P
+      = \frac{1}{2}\dot{l}^2(t) + \frac{1}{2}(l(t)\dot{\theta}(t))^2
+        - g l(t) \text{cos}\theta(t)
+\end{equation}
+
+Let the desired trajectory of swing $E_r$ be:
+\begin{equation}
+  E_r = \frac{1}{2}(l_r \dot{\theta}(t))^2 - g l_r \text{cos} \theta(t)
+\end{equation}
+
+\noindent with $E_r$ desired energy and $l_r$ desired length of the pendulum.
+Moreover, being $\theta_{\text{max}} \in (0, \pi]$ maximal angle of the desired swing:
+\begin{equation}
+  E_r = -g l_r \text{cos}\theta_{\text{max}}
+\end{equation}
+
+Given the above assumptions, let's consider the problem of trajectory tracking
+control, which consists in determining whether it is possible to design a
+control law $u$ such that:
+\begin{equation}
+  \lim_{t\to\infty} E_T = E_r \qquad
+  \lim_{t\to\infty} \dot{l} = 0 \qquad
+  \lim_{t\to\infty} l = l_r 
+\end{equation}
+
 \section{Total Energy Shaping}
 Ch. 8.3.1.
 
