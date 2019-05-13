@@ -181,7 +181,26 @@ control law $u$ such that:
 \end{equation}
 
 \section{Total Energy Shaping}
-Ch. 8.3.1.
+Let's consider the following Lyapunov function:
+\begin{equation}
+  V_c = \frac{1}{2} (E_T - E_r)^2 +
+        \frac{1}{2} k_P (l - l_r)^2 +
+        \frac{1}{2} k_D \dot{l}^2
+\end{equation}
+
+\noindent with $k_D$ and $k_P$ control parameters.
+
+Proof here.
+
+Controller (8.15):
+\begin{equation}
+  u = \frac{(E_T - E_r)(l\dot{\theta}^2 + g\text{cos}\theta) - k_P(l-l_r)
+    - k_V \dot{l}}{E_T - E_r + k_D}
+\end{equation}
+
+Lemma 2.2 not applicable here.
+
+Difficulty of finding a constant $k_D$ satisfying (8.17) for all $t \ge 0$.
 
 \subsection{Experiments}
 Ch. 8.5 (singular points in controller 8.18).
