@@ -181,7 +181,7 @@ control law $u$ such that:
 \end{equation}
 
 \section{Total Energy Shaping}
-Let's consider the following Lyapunov function:
+Let's consider the following Lyapunov candidate:
 \begin{equation}
   V_c = \frac{1}{2} (E_T - E_r)^2 +
         \frac{1}{2} k_P (l - l_r)^2 +
@@ -206,7 +206,32 @@ Difficulty of finding a constant $k_D$ satisfying (8.17) for all $t \ge 0$.
 Ch. 8.5 (singular points in controller 8.18).
 
 \section{Partial Energy Shaping}
-Ch. 8.3.2.
+Let's consider a partial kinetic energy $E_P$ consisting only of the sum of the
+kinetic energy of rotation and potential energy of the VLP:
+\begin{equation}
+  E_P = \frac{1}{2} (l(t)\dot{\theta}(t))^2 - gl(t)\text{cos}(t)
+\end{equation}
+
+Let's consider the following Lyapunov candidate:
+\begin{equation}
+  V = \frac{1}{2} (E_P - E_r)^2 +
+      \frac{1}{2} k_P (l - l_r)^2 +
+      \frac{1}{2} k_D \dot{l}^2
+\end{equation}
+
+Stuff.
+
+Let's take Controller (8.23):
+\begin{equation}
+  u = \frac{(E_P - E_r)(l\dot{\theta}^2 + g\text{cos}\theta) - k_P(l - l_r)
+    + k_V \dot{l}}{k_D}
+\end{equation}
+
+LaSalle's invariant principle.
+
+Largest Invariant Set.
+
+Lemma 8.1.
 
 \subsection{Motion Analysis}
 Ch. 8.4 (Convergence of Energy in 8.4.1, Closed-Loop Equilibrium Points in
