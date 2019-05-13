@@ -117,7 +117,41 @@ Ch. 8.1.
 Introduction\cite{Xin:2014:CDA:2584545}.
 
 \section{Problem Formulation}
-Ch. 8.2.
+Let's consider a variable length pendulum (VLP) with massless rod and without any
+friction. Let $\theta(t)$ be the angle between the pendulum and the y-axis
+(counterclockwise), let $l(t)$ be the length of the pendulum, let $m$ be the mass of 
+the pendulum and $f(t)$ be the force acting on the mass. Let $(x_G, y_G)$ be
+the coordinates of the mass:
+\begin{align}
+  x_G &= l(t) \text{sin}\theta(t) \\
+  y_G &= l(t) \text{cos}\theta(t)
+\end{align}
+
+Let $T$ be the kinetic energy of the VLP:
+\begin{equation}
+  T = \frac{1}{2} m ( \dot{x}_G^2 + \dot{y}_G^2 )
+    = \frac{1}{2} m ( l(t) \dot{\theta}^2 ) +
+      \frac{1}{2} m ( \dot{l}(t) )^2
+\end{equation}
+
+Let $P$ be the potential energy of the VLP:
+\begin{equation}
+  P = m g y_G = -m g l(t) \text{cos}\theta(t)
+\end{equation}
+
+The Lagrangian of the VLP is $L = T - P$. Using Euler-Lagrange equation, it is 
+possible to determine the motion equation of the VLP:
+\begin{gather}
+  \ddot{\theta}(t) + \frac{2 \dot{l}(t) \dot{\theta}(t)}{l(t)} +
+    \frac{g \text{sin}\theta(t)}{l(t)} = 0 \\
+  m \ddot{l}(t) - m l(t) \dot{\theta}^2(t) - mg\text{cos}\theta(t) = f(t)
+\end{gather}
+
+\noindent with $f(t)$ force applied to the mass.
+
+Let's consider $u = \ddot{l}(t)$ as control input for the next sections. Since 
+there is no control input controlling directly $\theta(t)$, the system is
+underactuated.
 
 \section{Total Energy Shaping}
 Ch. 8.3.1.
