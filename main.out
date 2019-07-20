@@ -1,0 +1,16 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Theoretical Background}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{LaSalle's Invariance Principle}{section.2}% 3
+\BOOKMARK [1][-]{section.3}{Motion Equation}{}% 4
+\BOOKMARK [1][-]{section.4}{Problem Formulation}{}% 5
+\BOOKMARK [1][-]{section.5}{Controller Design}{}% 6
+\BOOKMARK [2][-]{subsection.5.1}{Total Energy Shaping}{section.5}% 7
+\BOOKMARK [2][-]{subsection.5.2}{Partial Energy Shaping}{section.5}% 8
+\BOOKMARK [1][-]{section.6}{Motion Analysis}{}% 9
+\BOOKMARK [2][-]{subsection.6.1}{Convergence of Energy}{section.6}% 10
+\BOOKMARK [2][-]{subsection.6.2}{Closed-Loop Equilibrium Points}{section.6}% 11
+\BOOKMARK [1][-]{section.7}{Simulation Results}{}% 12
+\BOOKMARK [2][-]{subsection.7.1}{Total Energy Shaping}{section.7}% 13
+\BOOKMARK [2][-]{subsection.7.2}{Partial Energy Shaping}{section.7}% 14
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 15
+\BOOKMARK [1][-]{section*.3}{References}{}% 16

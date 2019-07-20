@@ -1,0 +1,239 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+\section{Motion Analysis}
+\label{sec:motion-analysis}
+The tracking control objective in \eqref{control_obj} is 
+achieved if and only if $V^* = 0$, where $V^*$ is defined as
+\begin{equation}
+  V^* = \frac{1}{2}(E^*-E_r)^2+\frac{1}{2}k_P(l^*-l_r)^2
+\end{equation}
+\subsection{Convergence of Energy}
+\label{subsec:convergence-of-energy}
+Consider $E_P \equiv E^*$, $l \equiv l^*$, $\dot{l} \equiv 0$ and
+$\dot{l} \equiv 0$ and $u = \ddot{l} \equiv 0$, then, from
+\eqref{eq:controller-partial-energy-shaping}
+\begin{equation}
+  \label{eq:convergence-of-energy}
+  (E^*-E_r)(l^*\dot{\theta}^2+g\cos\theta)-k_P(l^*-l_r) \equiv 0
+\end{equation}
+
+\noindent \textbf{Case 1:} $E^* = E_r$
+
+In this case, $l^* = l_r$ directly follows from 
+\eqref{eq:convergence-of-energy}. The largest invariant set $W$
+defined in \eqref{eq:largest-invariant-set} becomes
+\begin{equation}
+  \label{eq:def-Wr}
+  W_r = \left\{ (\theta, l, \dot{\theta}, \dot{l})
+    \middle| \frac{1}{2} (l_r \dot{\theta})^2 -
+    g l_r \cos\theta \equiv E_r, l \equiv l_r \right\}
+\end{equation}
+hence, as $t \to \infty$, the closed-loop solution
+$(\theta(t), l(t), \dot{\theta}(t), \dot{l}(t))$ achieves the
+tracking control objective in \eqref{control_obj}.
+
+\noindent \textbf{Case 2} $E^* \neq E_r$
+
+In this case, from \eqref{eq:convergence-of-energy}
+\begin{equation}
+  l^* \dot{\theta}^2 + g\cos\theta \equiv 
+  \frac{k_P(l^*-l_r)}{E^*-E_r}
+\end{equation}
+Moreover, since by hypothesis $E_P \equiv E^*$ and $l 
+\equiv l^*$
+\begin{equation}
+  l^* \dot{\theta}^2 - 2g\cos\theta \equiv \frac{2E^*}{l^*}
+\end{equation}
+
+Taking difference between the above equations shows that
+$\cos\theta$ is a constant, hence $\theta$ is a constant.
+Let's denote it as $\theta \equiv \theta^*$, which yields
+$\sin\theta^*=0$.
+
+Since $\theta \equiv \theta^*$ constant (hence $\dot{\theta}
+= 0$) the two above equations respectively become
+\begin{gather}
+  \label{eq:convergence-energy:case2:A}
+  g\cos\theta^* = \frac{k_P(l^*-l_r)}{E^*-E_r} \\
+  E^* = -l^*g\cos\theta^*
+\end{gather}
+
+Considering $E_r = -g l_r \cos\theta_{\max}$ from
+\eqref{eq:Er-property}, by substituting $E^*$ and $E_r$ into
+\eqref{eq:convergence-energy:case2:A} and considering 
+$\cos^2\theta^* = 1 - \sin^2\theta^* = 1$ it is possible to
+obtain the following
+\begin{equation}
+  l^* = \frac{l_r(k_P+g^2\cos\theta_{\max}\cos\theta^*)}{k_P+g^2}
+\end{equation}
+Therefore, since $\sin\theta^*=0$ admits a solution only in
+$\{0, \pi\}$, either $(\theta^*, l^*)=(\pi, l_{ue})$ or $(\theta^*,
+l^*)=(0, l_{de})$ where
+\begin{align}
+  l_{ue} = l^*\rvert_{\theta^*=\pi} &=
+  \frac{l_r(k_P-g^2\cos\theta_{\max})}{k_P+g^2} \\
+  l_{de} = l^*\rvert_{\theta^*=0} &=
+  \frac{l_r(k_P+g^2\cos\theta_{\max})}{k_P+g^2}
+\end{align}
+where ``ue'' and ``de'' respectively denote upright equilibrium
+point and downward equilibrium point. To guarantee that the length
+of the pendulum $l_{ue}$ and $l_{de}$ are positive in the two
+cases respectively assume $k_P>-g^2\cos\theta_{\max}$ and
+$k_P>g^2\cos\theta_{\max}$, which can be rewritten as
+\begin{equation}
+  \label{eq:kP-property}
+  k_P > g^2 |\cos\theta_{\max}|
+\end{equation}
+By considering the above with $0 < \theta_{\max} \le \pi$
+in \eqref{eq:Er-property}, it is easy to prove (e.g. by
+contradiction) that
+\begin{gather}
+  0 < l_{ue} \le l_r \\ 0 < l_{de} < l_r
+\end{gather}
+Let $\Omega$ be the equilibrium point set (which is an
+invariant set for the considered system) defined as follows
+\begin{equation}
+  \label{eq:def-Omega}
+  \Omega = \{ (\pi, l_{ue}, 0, 0), (0, l_{de}, 0, 0) \}
+\end{equation}
+
+\subsection{Closed-Loop Equilibrium Points}
+Consider the two equilibrium points defined in $\Omega$.
+Let the state variable vector be $x = (\theta, l, \dot{\theta},
+\dot{l})^T$. The state space representation is
+\begin{equation}
+  \dot{x} = f(x)
+\end{equation}
+which, considering the dynamics described by \eqref{full_model}
+and the controller described by
+\eqref{eq:controller-partial-energy-shaping},
+can be rewritten as 
+\begin{align}
+  \dot{x}_1 &= x_3 \\
+  \dot{x}_2 &= x_4 \\
+  \dot{x}_3 &= -\frac{2 x_3 x_4 + g\sin x_1}{x_2} \\
+  \dot{x}_4 &= \frac{(E_P-E_r)(x_2 x_3^2 + g\cos x1)
+    -k_P(x_2-l_r)-k_V x_4}{k_D}
+\end{align}
+where $E_P=x_2^2 x_3^2 / 2 - g x_2 \cos x_1$ from
+\eqref{eq:partial-energy}.
+
+By using the indirect method of Lyapunov (also known
+as first 
+method of Lyapunov) it is possible to study
+the stability of the equilibrium points of the system.
+
+The characteristic equation of the Jacobian matrix evaluated
+at the upper equilibrium point $x_{ue} = (\pi, l_{ue}, 0, 0)^T$
+yields
+\begin{equation}
+  det(sI-A_{ue}) = \left( s^2 + \frac{k_V}{k_D}s +
+    \frac{g^2+k_P}{k_D} \right) \left( s^2 - \frac{g}{l_{ue}}
+    \right)
+\end{equation}
+where $I \in \mathbb{R}^{4 \times 4}$ identity matrix and
+\begin{equation}
+  A_{ue} = \frac{\partial f(x)}{\partial x} \bigg\rvert_{x=x_{ue}}
+\end{equation}
+hence, the jacobian $A_{ue}$ has three eigenvalues in the open LHP and
+one eigenvalue in the open RHP. Thus, the updward equilibrium point
+is unstable and hyperbolic (since all the eigenvalues of $A_{ue}$
+have non-zero real parts).
+SOMETHING ABOUT TH. 2.10 AND LEBESGUE MEASURE ZERO.
+
+The characteristic equation of the Jacobian matrix evaluated
+at the downward equilibrium point $x_{de} = (0, l_{de}, 0, 0)^T$ yields
+\begin{equation}
+  det(sI-A_{de}) = \left( s^2 + \frac{k_V}{k_D}s +
+    \frac{g^2+k_P}{k_D} \right) \left( s^2 + \frac{g}{l_{ue}}
+    \right)
+\end{equation}
+where $I \in \mathbb{R}^{4 \times 4}$ identity matrix and
+\begin{equation}
+  A_{de} = \frac{\partial f(x)}{\partial x} \bigg\rvert_{x=x_{de}}
+\end{equation}
+hence, the Jacobian $A_{de}$ two eigenvalues in the open LHP and two
+eigenvalues on the imaginary axis (hence, non-hyperbolic since there
+is at least one eigenvalue on the imaginary axis). In case of
+non-hyperbolic equilibrium points, linearization fails to determine
+its stability from the Jacobian matrix. A possible solution
+is to use CENTER MANIFOLD THEOREM 2.9 (2.1.4), which is 
+however too hard for this system. Consider the Lyapunov
+function V defined in
+\eqref{eq:lyapunov-function-partial-energy-shaping}.
+Consider the following set
+\begin{equation}
+  \label{eq:Gamma-d-invariant-set}
+  \Gamma_d = \left\{ (\theta, l, \dot{\theta}, \dot{l})
+    \mid V(\theta, l, \dot{\theta}, \dot{l}) <
+    V(0, l_{de}, 0, 0) \right\}
+\end{equation}
+
+Let the values of V at the downward equilibrium point $x_{de}$
+and a state $(\delta, l_{de}, 0, 0)$ be respectively $V_{de}$
+and $V_\delta$
+\begin{gather}
+  V_{de} = V(0, l_{de}, 0, 0) = \frac{1}{2}(g l_{de} + E_r)^2
+    + \frac{1}{2} k_P (l_{de} - l_r)^2 \\
+  V_\delta = V(\delta, l_{de}, 0, 0) = \frac{1}{2}(g l_{de}
+    \cos\delta + E_r)^2 + \frac{1}{2} k_P (l_{de} - l_r)^2
+\end{gather}
+Compute the difference between the two above values yields
+\begin{align}
+  \label{eq:diff-lyapunov-V}
+  V_\delta - V_{de} %&= -\frac{1}{2} g l_{de} (1-\cos\delta)
+    %(g l_{de}(1+\cos\delta)+2E_r) \\
+    &= -\frac{g^2 l_{de} l_r (1-\cos\delta) \Xi}{k_P+g^2}
+\end{align}
+where
+\begin{equation}
+  \Xi = k_P(1-\cos\theta_{\max})-(k_P+g^2\cos\theta_{\max})
+    \sin^2 \left( \frac{\delta}{2} \right)
+\end{equation}
+Using $k_P > -g^2\cos\theta_{\max}$ from \eqref{eq:kP-property} and
+$|\sin \delta|<|\delta|$ for $\delta \neq 0$ (hence
+$k_P+g^2\cos\theta_{\max}>0$ and
+$-\sin^2(\delta/2)>-\delta^2/4$)
+\begin{equation}
+  \Xi > k_P(1-\cos\theta_{\max})-
+    \frac{(k_P+g^2\cos\theta_{\max})\delta^2}{4}
+\end{equation}
+with $\delta \neq 0$. Moreover, if $\delta$ satisfies
+\begin{equation}
+  \label{eq:delta-property}
+  0 < |\delta| \le \delta_m = 2
+    \sqrt{\frac{k_P(1-\cos\theta_{\max})}{k_P+g^2\cos\theta_{\max}}}
+\end{equation}
+then $\Xi>0$ (proof by simply noticing that $-\delta^2\ge-\delta_m^2$),
+which, using \eqref{eq:diff-lyapunov-V}, implies
+\begin{equation}
+  V_\delta < V_{de}, \quad (\delta, l_{de}, 0, 0) \in \Gamma_d
+\end{equation}
+which implies, because of the
+definition of $\Gamma_d$ in \eqref{eq:Gamma-d-invariant-set},
+that $\Gamma_d \neq \varnothing$.
+
+Since the considered Lyapunov function
+\eqref{eq:lyapunov-function-partial-energy-shaping} is
+monotonically decreasing under the controller \eqref{eq:controller-partial-energy-shaping}, for any $\delta$
+satisfying \eqref{eq:delta-property}, closed-loop solution
+starting from an initial state belonging to $\Gamma_d$
+approaches $W_r$ due to the results obtained in
+subsection \ref{subsec:convergence-of-energy} (Case 1),
+hence, the downward
+equilibrium point $(0, l_{de}, 0, 0)$ is unstable in the
+Lyapunov sense.
+
+It is, hence, possible to conclude by saying that
+every closed-loop solution under the closed-loop
+system consisted of the dynamic equation
+\eqref{full_model} and the controller
+\eqref{eq:controller-partial-energy-shaping}, supposing
+$k_P>g^2|\cos\theta_{\max}|$, $k_D>0$, $k_V>0$,
+$0<\theta_{\max}\le\pi$, approaches $W=W_r\cup\Omega$,
+where $W_r$ is defined in \eqref{eq:def-Wr} and $\Omega$
+is defined in \eqref{eq:def-Omega}.
+
+\end{document}

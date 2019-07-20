@@ -1,0 +1,124 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+\section{Controller Design}
+\label{sec:controller-design}
+To propose a design for control input $u$ for the given control tracking problem, in order to achieve the required control objective in equation \eqref{control_obj}, two approaches for the controller design have been considered in \cite{xin2014control}. The first one applies the conventional energy-based control approach, while the second one was proposes modifications for the aforementioned method.
+\subsection{Total Energy Shaping}
+Consider the conventional Lyapunov candidate
+\begin{equation}
+    V_c = \frac{1}{2}(E_T-E_r)^2+\frac{1}{2}k_P(l-l_r)^2+\frac{1}{2}k_D\dot{l}^2
+\end{equation}
+where $k_D,k_P > 0$ are scalar control parameters. Computing the time derivative of $E_T$ defined in equation \eqref{total_energy}
+\begin{equation}\label{energy_dot}
+    \dot{E}_T = (u-l\dot{\theta}^2-gl\cos\theta)\dot{l}
+\end{equation}
+then the time derivative of the Lyapunov candidate $V_c$ along the trajectories of \eqref{full_model} is computed as
+\begin{equation}
+    \dot{V}_c = \dot{l}\big((E_T-E_r+k_D)u-(E_T-E_r)(l\dot{\theta}^2+g\cos\theta)-k_P(l-l_r) \big)
+\end{equation}
+ 
+Consider the following controller
+\begin{equation}
+\label{eq:tot-mech-energy-controller}
+    u = \frac{(E_T-E_r)(l\dot{\theta}^2+g\cos\theta)-k_P(l-l_r)-k_V\dot{l}}{E_T-E_r+k_D}
+\end{equation}
+ for some positive $k_V$, then 
+ \begin{equation}
+     \dot{V}_c = -k_V\dot{l}^2 \leq 0
+ \end{equation}
+which holds only if
+ \begin{eqnarray}
+    E_T-E_r+k_D  \neq 0 \ \ \ \ \  	\forall t\geq 0
+ \end{eqnarray}
+
+% Lemma 2.2 part.
+% With $E_T \ge -gl(t)$ being the lower bound of the energy of the system, and $l(t)$ being a variable, hence the lower bound.
+
+Given Eq. \eqref{total_energy}, since $E_T \ge -gl(t)$,
+the total mechanical energy is not bounded from below.
+[THIS BOUNDED FROM BELOW PART MUST BE EXPLAINED
+BETTER].
+Hence, it is not possible to choose a $k_D$ which would
+ensure the proposed controller to be free of singular
+points.
+
+\subsection{Partial  Energy Shaping}
+Let $E_P$ be the sum of kinetic energy of rotation and potential
+energy of the VLP
+\begin{equation}
+  \label{eq:partial-energy}
+  E_P = \frac{1}{2}(l(t)\dot{\theta}(t))^2-gl(t)\cos\theta(t)
+\end{equation}
+
+\noindent and consider the following Lyapunov candidate
+\begin{equation}
+  \label{eq:lyapunov-function-partial-energy-shaping}
+  V = \frac{1}{2}(E_P-E_r)^2+\frac{1}{2}k_P(l-l_r)^2+
+      \frac{1}{2}k_D\dot{l}^2
+\end{equation}
+
+Taking the time derivative of $E_P$ and using the Euler-Lagrange
+equation \eqref{full_model} yields
+\begin{equation}
+  \dot{E}_P = -(l\dot{\theta}^2+g\cos\theta)\dot{l}
+\end{equation}
+
+\noindent which, by taking the time derivative of $V$, shows that
+\begin{equation}
+  \label{eq:partial-energy-shaping:vdot}
+  \dot{V} = \big(-(E_P-E_r)(l\dot{\theta}^2+g\cos\theta)+k_P(l-l_r)\big) + k_D u) \dot{l}
+\end{equation}
+
+Consider the following controller
+\begin{equation}
+  \label{eq:controller-partial-energy-shaping}
+  u = \frac{(E_P-E_r)(l\dot{\theta}^2+g\cos\theta)-k_P(l-l_r)
+      -k_V\dot{l}}{k_D}
+\end{equation}
+
+\noindent which is free of singular points. Substituting
+\eqref{eq:controller-partial-energy-shaping} back into 
+\eqref{eq:partial-energy-shaping:vdot} shows that
+\begin{equation}
+  \label{eq:partial-energy-shaping:v-nsd}
+  \dot{V} = -k_V \dot{l}^2 \le 0, \quad k_V > 0
+\end{equation}
+
+Consider the following set
+\begin{equation}
+  \Gamma_c = \left\{(\theta,l,\dot{\theta},\dot{l})|
+      V(\theta,l,\dot{\theta},\dot{l}) \le c\right\},
+      \quad c > 0
+\end{equation}
+
+Since $\dot{V} \le 0$ from \eqref{eq:partial-energy-shaping:v-nsd},
+any closed-loop solution starting in $\Gamma_c$ remains in $\Gamma_c$
+for all $t \ge 0$.
+Let $W$ be the largest invariant set in
+\begin{equation}
+    S = \{(\theta,l,\dot{\theta},\dot{l})) \in \Gamma_c|\dot{V}=0\}
+\end{equation}
+
+Using LaSalle's invariant principle (Theorem
+\ref{th:lasalle-s-invariance-principle}), every closed-loop
+solution starting in $\Gamma_c$ approaches $W$ as $t \to
+\infty$.
+
+Since $\dot{V} = 0$ holds for all elements of $W$, $V$ and $l$
+are constant in $W$ (let them be $V^*$ and $l^*$). Moreover,
+since $V$ is a constant in $W$, $E_P$ is also a constant in $W$
+(from \eqref{eq:lyapunov-function-partial-energy-shaping}).
+Consequently
+ \begin{eqnarray}
+  \lim_{t\rightarrow \infty} E_P = E^*  \ \ \ \ \ \  \lim_{t\rightarrow \infty} \dot{l} = 0 \ \ \ \ \ \  \ \ \lim_{t\rightarrow \infty} l = l^*
+ \end{eqnarray}
+ 
+Thus, the largest invariant set $W$ can be defined as
+\begin{equation}
+  \label{eq:largest-invariant-set}
+  W = \left\{(\theta,l,\dot{\theta},\dot{l})\middle|\frac{1}{2}(l^*\dot{\theta})^2-gl^*\cos\theta \equiv E^*, l \equiv l^*\right\}
+\end{equation}
+
+\end{document}

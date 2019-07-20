@@ -1,0 +1,35 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+\section{Introduction}
+The aim of the project is to study the variable length 
+pendulum (VLP) presented in \cite{xin2014control} along
+with the controllers designed to make it achieve a 
+desired swing motion given a desired energy and a desired
+length of the pendulum.
+
+The report introduces the theory needed to
+study the stability of the considered systems in Section
+\ref{sec:theoretical-background}, describing invariant
+sets and LaSalle's invariance principle. A detailed
+description of the variable length pendulum is given in
+Section \ref{sec:motion-equation}, where the dynamics
+equations of the VLP are introduced by using Euler-Lagrange
+equations. The trajectory control problem is briefly
+described in Section \ref{sec:problem-formulation}.
+Section \ref{sec:controller-design} studies two approaches
+to design the controllers that make the VLP perform a
+swing trajectory. The first one is based on total energy
+shaping while the second one is based on partial energy shaping.
+Section \ref{sec:motion-analysis} analyzes the behaviour
+of the VLP under the controller designed with partial
+energy shaping, discussing the stability of the
+equilibrium points of the system. Section
+\ref{sec:simulation-results} presents a few simulation
+experiments which have been performed through a custom
+Simulink implementation of the controllers studied in
+this report. Section \ref{sec:conclusion} concludes
+the report, summarizing the obtained results.
+
+\end{document}

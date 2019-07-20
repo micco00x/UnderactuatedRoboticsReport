@@ -1,0 +1,35 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+\section{Theoretical Background}
+\label{sec:theoretical-background}
+\subsection{LaSalle's Invariance Principle}
+Let $\dot{x} = f(x)$ be an autonomous system with
+$f: D \to \mathbb{R}^n$
+locally Lipschitz map from a domain $D \subseteq
+\mathbb{R}^n$ into $\mathbb{R}^n$.
+\begin{definition}{(Invariant Set)}
+A set $W$ is called \textit{invariant set} with respect
+to the above autonomous system $\dot{x} = f(x)$ if
+\begin{equation}
+  x(0) \in W \implies \forall t \in \mathbb{R}:x(t) \in W
+\end{equation}
+Intuitively, if a solution belongs to $W$ at a certain
+instant $t$, then it belongs to $W$ for all instants.
+$W$ is called \textit{positively invariant set} if the
+above holds $\forall t > 0$.
+\end{definition}
+\begin{theorem}{(LaSalle's Invariance Principle)}
+\label{th:lasalle-s-invariance-principle}
+Let $\Gamma \subset D$ be a closed and bounded set (a
+compact set) which is invariant with respect to the above
+autonomous system $\dot{x} = f(x)$. Let $V: D \to
+\mathbb{R}$ be a continuously differentiable function
+such that $\dot{V}(x)\le0$ in $\Gamma$. Let
+$S = \{x \in \Gamma \mid \dot{V}(x)=0\}$. Let W be the 
+largest invariant set in $S$. Then, every solution
+starting in $\Gamma$ approaches $W$ as $t \to \infty$.
+\end{theorem}
+
+\end{document}
